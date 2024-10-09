@@ -1,0 +1,54 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug (MinGW)",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/Debug_install/bin/hello_world.exe",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/build/Debug_install/bin",
+            "environment": [],
+            "externalConsole": false,
+            "osx": {
+                "MIMode": "lldb"
+            },
+            "linux": {
+                "MIMode": "gdb",
+                "setupCommands": [
+                    {
+                        "description": "Enable pretty-priting for gdb",
+                        "text": "-enable-pretty-printing",
+                        "ignoreFailures": true
+                    }
+                ]
+            },
+            "windows": {
+                "type": "cppvsdbg",
+                "MIMode": "gdb",
+            },
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "ignoreFailures": true,
+                    "text": "-enable-pretty-printing"
+                }
+            ],
+            "preLaunchTask": "program_Install",
+            "internalConsoleOptions": "openOnSessionStart",
+            "logging": {
+                "engineLogging": true
+            },
+            // "visualizerFile": "c:\\Users\\zero\\AppData\\Roaming\\Code\\User\\workspaceStorage\\0fedf86284ac713bf73a8e0e8485a754\\tonka3000.qtvsctools\\qt.natvis.xml",
+            "environment": [
+                {
+                    "name": "Home",
+                    "value": "${workspaceFolder}/build/Debug_install"
+                },
+                // {"name": "PATH", "value": "${workspaceFolder}/build/Debug_install/lib64:${PATH}"}
+                // {"name": "DISPLAY", "value": "localhost:12.0"}
+            ]
+        }
+    ]
+}
