@@ -5,7 +5,7 @@
             "name": "Debug (MinGW)",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/build/Debug_install/bin/hello_world.exe",
+            "program": "${workspaceFolder}/build/Debug_install/bin/yezhu_converter.exe",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}/build/Debug_install/bin",

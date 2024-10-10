@@ -1,11 +1,16 @@
 cmake_minimum_required(VERSION 3.10)
-project(HelloWorld VERSION 1.0)
+project(YezhuConverter VERSION 1.0)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
+
 # set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 set(CMAKE_WIN32_EXECUTABLE ON)
 
+# undefined reference to `vtable for MainWindow'
+set(CMAKE_AUTORCC ON)
+set(CMAKE_AUTOUIC ON)
+set(CMAKE_AUTOMOC ON)
 
 # build type
 if(DEFINED CMAKE_BUILD_TYPE)
@@ -13,28 +18,42 @@ if(DEFINED CMAKE_BUILD_TYPE)
 else()
     set(CMAKE_BUILD_TYPE Release CACHE STRING "Set to either \"Release\" or \"Debug\"")
 endif()
-set(EXECUTABLE_NAME hello_world)
+
+set(PROJECT_NAME yezhu_converter)
+
+set(DIALOGS_DIR src/dialogs)
+set(DIALOGS_FILE
+    ${DIALOGS_DIR}/ExportDialog.cpp
+)
+
+set(WIDGETS_DIR src/widgets)
+set(WIDGETS_FILE
+)
+
+
 set(SOURCE_DIR src)
-set(SOURCE_FILE 
+set(SOURCE_FILE
+    ${DIALOGS_FILE}
+    ${WIDGETS_FILE}
     ${SOURCE_DIR}/main.cpp
     ${SOURCE_DIR}/converter.cpp
+    ${SOURCE_DIR}/MainWindow.cpp
 )
+
 # set(CMAKE_BUILD_TYPE Debug CACHE STRING "Build type" FORCE)
 
 # 查找 Qt6 库
 find_package(Qt6 REQUIRED COMPONENTS Core Gui Widgets)
 find_package(JPEG REQUIRED)
 
-
 # 添加可执行文件
-add_executable(${EXECUTABLE_NAME} ${SOURCE_FILE})
+add_executable(${PROJECT_NAME} ${SOURCE_FILE})
 
-
-target_include_directories(${EXECUTABLE_NAME} PRIVATE include)
-
+target_include_directories(${PROJECT_NAME} PRIVATE include)
 
 # 链接 Qt6 库
-target_link_libraries(${EXECUTABLE_NAME}
+target_link_libraries(${PROJECT_NAME}
+
     # Qt6::Core
     # Qt6::Gui
     Qt6::Widgets
@@ -48,17 +67,18 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 
 # 添加安装规则
-# install(TARGETS ${EXECUTABLE_NAME}
-#     RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX}/bin
+# install(TARGETS ${PROJECT_NAME}
+# RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX}/bin
 # )
-install( TARGETS ${EXECUTABLE_NAME}
+install(TARGETS ${PROJECT_NAME}
     DESTINATION ${CMAKE_INSTALL_BINDIR}
     COMPONENT binary
-    )
+)
+
 # 安装动态库
 # install(TARGETS JPEG::JPEG
-#     DESTINATION ${CMAKE_INSTALL_LIBDIR}
-#     COMPONENT libraries
+# DESTINATION ${CMAKE_INSTALL_LIBDIR}
+# COMPONENT libraries
 # )
 # 复制动态库到安装目录
 # 复制 Qt 动态库到安装目录
@@ -72,6 +92,7 @@ execute_process(
     $ENV{CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_BINDIR}
 )
 ")
+
 # 检查 Qt6Widgets.dll.a 是否存在
 set(QT_WIDGETS_LIB_PATH "$ENV{MSYSTEM}/mingw64/bin/Qt6Widgets.dll.a")
 

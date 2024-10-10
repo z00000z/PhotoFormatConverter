@@ -19,6 +19,7 @@
 // #include <algorithm> // 用于 std::clamp
 // #include <QImage>
 // #include <QColor>
+#include "MainWindow.h"
 
 void convertFilesInResourceDirectory()
 {
@@ -39,33 +40,9 @@ void convertFilesInResourceDirectory()
 
 int main(int argc, char *argv[])
 {
-    // convertFilesInResourceDirectory();
     QApplication app(argc, argv);
-
-    // 创建一个窗口
-    QWidget window;
-    window.setWindowTitle("Hello World");
-
-    // 创建一个按钮
-    QPushButton button("Hello World", &window);
-
-    QObject::connect(&button, &QPushButton::clicked, [&]()
-                     {
-        QMessageBox::StandardButton reply;
-        reply = QMessageBox::question(&window, "确认", "hai", 
-                                      QMessageBox::Ok | QMessageBox::Cancel);
-        if (reply == QMessageBox::Ok) {
-            // 用户点击了 OK
-        } else {
-            // 用户点击了 Cancel
-        } });
-
-    // 创建布局并将按钮添加到窗口中
-    QVBoxLayout layout;
-    layout.addWidget(&button);
-    window.setLayout(&layout);
-
+    MainWindow window;
+    window.resize(800, 600);
     window.show();
-
     return app.exec();
 }
