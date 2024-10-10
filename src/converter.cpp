@@ -1,12 +1,12 @@
 #include "converter.h"
 #include <libraw/libraw.h>
-#include <stb_image_write.h>
+// #include <stb_image_write.h>
 #include <iostream>
 #include <filesystem>
 #include <string>
-#include <algorithm> // 用于 std::clamp
-#include <QImage>
-#include <QColor>
+// #include <algorithm> // 用于 std::clamp
+// #include <QImage>
+// #include <QColor>
 
 #define USE_JPEG 1
 
